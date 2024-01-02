@@ -49,6 +49,6 @@ jobs:
         run: | 
           dotnet tool install --global dotnet-ef --version 7.0.0
           dotnet tool restore
-          dotnet ef database update -p DotNetCoreSqlDb --connection '${{ secrets.DBConnection }}'
+          dotnet ef database update -p Migrations --connection '${{ secrets.DBConnection }}'
 
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
