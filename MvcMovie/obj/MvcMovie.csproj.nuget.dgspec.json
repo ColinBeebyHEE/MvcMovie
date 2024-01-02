@@ -10,14 +10,14 @@
         "projectUniqueName": "C:\\MyStuff\\MvcMovie\\MvcMovie\\MvcMovie.csproj",
         "projectName": "MvcMovie",
         "projectPath": "C:\\MyStuff\\MvcMovie\\MvcMovie\\MvcMovie.csproj",
-        "packagesPath": "C:\\Users\\colin.beeby\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\TELadminCB\\.nuget\\packages\\",
         "outputPath": "C:\\MyStuff\\MvcMovie\\MvcMovie\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages"
         ],
         "configFilePaths": [
-          "C:\\Users\\colin.beeby\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TELadminCB\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
