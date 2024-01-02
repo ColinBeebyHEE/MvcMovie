@@ -29,14 +29,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-using (var scope = app.Services.CreateScope())
-{
-  using (var dbContext = scope.ServiceProvider.GetRequiredService<MvcMovieContext>())
-  {
-    await dbContext.Database.MigrateAsync();
-  }
-}
   
 
 app.Run();
