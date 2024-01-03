@@ -13,12 +13,12 @@ env:
   AZURE_WEBAPP_NAME: colins-app-service-x63547    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '6.0.x'             # set this to the dot net version to use
+  ACTIONS_STEP_DEBUG: true
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment: 
-      ACTIONS_STEP_DEBUG: true
+    environment: dev
     steps:
 
       # Checkout the repo
