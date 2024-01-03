@@ -52,9 +52,13 @@ jobs:
           dotnet tool restore
           dotnet ef database update -p MvcMovie --connection '${{ secrets.DBConnection }}'
           
-      - name: Get Public IP
+      - name: Public IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+
+      - name: Print Public IP
         run: |
-          response=$(curl https://api.ipify.org)
-          echo $response
+          echo ${{ steps.ip.outputs.ipv4 }}
+          echo ${{ steps.ip.outputs.ipv6 }}
 
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
