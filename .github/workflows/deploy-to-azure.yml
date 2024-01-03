@@ -53,6 +53,7 @@ jobs:
           
       - name: Get Public IP
         run: |
-          curl --url https://api.ipify.org
+          response=$(curl https://api.ipify.org)
+          echo $response
 
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
