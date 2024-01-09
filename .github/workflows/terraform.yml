@@ -35,17 +35,17 @@ jobs:
       - name: 'Terraform init'
         id: init
         run: |
-          cd Terraform
+          cd MvcMovie/Terraform
           terraform init          
 
       - name: 'Terraform plan'
         id: plan
         run: |
-          cd Terraform
+          cd MvcMovie/Terraform
           terraform plan
                     
       - name: 'Terraform apply'
         id: apply
         run: |
-          cd Terraform
+          cd MvcMovie/Terraform
           terraform apply -auto-approve          
