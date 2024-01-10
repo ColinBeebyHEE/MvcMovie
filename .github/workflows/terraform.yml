@@ -31,6 +31,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: 'Setup Terraform'
+        uses: hashicorp/setup-terraform@v1
+
       # Runs a single command using the runners shell
       - name: 'Terraform init'
         id: init
