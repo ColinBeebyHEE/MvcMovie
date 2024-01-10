@@ -5,8 +5,8 @@ resource "azurerm_resource_group" "resourcegroups" {
 
 resource "azurerm_service_plan" "example" {
   name                = "colins-mvc-movie-app-service-plan"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.resourcegroups.location
+  resource_group_name = azurerm_resource_group.resourcegroups.name
   sku_name			  = "B1"
   os_type			  = "Linux"
 }
