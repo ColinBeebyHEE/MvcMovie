@@ -6,10 +6,10 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name     = "DefaultResourceGroup-WUK"
-    storage_account_name    = "colsstorageaccount"
+    resource_group_name     = "NE-ELFH-HUB-STOR-RG"
+    storage_account_name    = "elfhhubdevstore"
     container_name          = "tfstate"
-    key                     = "GitHub-Terraform-rg-loganalytics-001"
+    key                     = "colin.terraform.tfstate"
   }
 }
 provider "azurerm" {
