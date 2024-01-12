@@ -45,3 +45,7 @@ resource "azurerm_mssql_firewall_rule" "appServiceIP" {
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "0.0.0.0"
 }
+
+output "connection_string" {
+  value = "Server=tcp:${azurerm_mssql_server.MvcMovieMssqlServer.fqdn},1433;Initial Catalog=${azurerm_mssql_database.MvcMovieMssqlDatabase.name};Persist Security Info=False;User ID=${var.sql_admin_username};Password=${var.sql_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+}
