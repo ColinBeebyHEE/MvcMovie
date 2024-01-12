@@ -84,6 +84,13 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
+      # Run the DB migrations
+      - name: Run EF 
+        run: | 
+          dotnet tool install --global dotnet-ef --version 7.0.0
+          dotnet tool restore
+          dotnet ef database update -p MvcMovie --connection '${{ secrets.DBConnection }}'
+
       # Azure logout 
       - name: logout
         run: |
