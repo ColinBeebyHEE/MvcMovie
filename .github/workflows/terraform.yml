@@ -33,6 +33,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+
+      - name: 'Az CLI login'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       
       # Runs a single command using the runners shell
       - name: 'Terraform init'
@@ -71,8 +79,9 @@ jobs:
         uses: azure/webapps-deploy@v2
         with: 
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
-          subscription-id: ${{ env.SUBSCRIPTION_ID }}
-          tenant-id: ${{ env.ARM_TENANT_ID }}
-          client-id: ${{ env.CLIENT_ID }}
-          client-secret: ${{ env.CLIENT_SECRET }}
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+
+      # Azure logout 
+      - name: logout
+        run: |
+          az logout
