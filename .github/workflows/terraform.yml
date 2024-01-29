@@ -57,7 +57,7 @@ jobs:
         id: destroy
         run: |
           cd MvcMovie/Terraform
-          terraform destroy
+          terraform destroy -auto-approve
           
       - name: 'Terraform plan'
         id: plan
