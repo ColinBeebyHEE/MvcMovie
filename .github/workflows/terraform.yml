@@ -53,11 +53,11 @@ jobs:
           cd MvcMovie/Terraform
           terraform init          
 
-      - name: 'Terraform destroy'
-        id: destroy
-        run: |
-          cd MvcMovie/Terraform
-          terraform destroy -auto-approve
+      #- name: 'Terraform destroy'
+      #  id: destroy
+      #  run: |
+      #    cd MvcMovie/Terraform
+      #    terraform destroy -auto-approve
           
       - name: 'Terraform plan'
         id: plan
