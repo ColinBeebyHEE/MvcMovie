@@ -20,6 +20,5 @@ provider "azurerm" {
   features {}
 }
 provider "github" {
-  owner = "ColinBeebyHEE"
-  token = "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"
+  token = "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"
 }
