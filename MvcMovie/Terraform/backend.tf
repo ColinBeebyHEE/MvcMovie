@@ -20,5 +20,5 @@ provider "azurerm" {
   features {}
 }
 provider "github" {
-  token = "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"
+  token = var.personal_access_token
 }
