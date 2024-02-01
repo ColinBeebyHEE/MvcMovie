@@ -19,4 +19,6 @@ terraform {
 provider "azurerm" {
   features {}
 }
-provider "github" {}
+provider "github" {
+  token = "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"
+}
