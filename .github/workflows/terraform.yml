@@ -37,6 +37,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+  
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
 
       - name: 'Az CLI login'
         uses: azure/login@v1
@@ -69,7 +73,13 @@ jobs:
         id: apply
         run: |
           cd MvcMovie/Terraform
-          terraform apply -auto-approve          
+          terraform apply -auto-approve
+ 
+      - name: 'Terraform output'
+        id: output
+        run: |
+          cd MvcMovie/Terraform
+          terraform output connection_string
 
       # Setup .NET Core SDK
       - name: Setup .NET Core
