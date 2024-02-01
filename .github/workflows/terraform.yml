@@ -33,6 +33,7 @@ jobs:
       AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
       DOTNET_VERSION: '6.0.x'             # set this to the dot net version to use
       TF_VAR_personal_access_token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
+      TF_VAR_sql_admin_password: ${{secrets.SQL_ADMIN_PASSWORD}}
       
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -64,11 +65,11 @@ jobs:
       #    cd MvcMovie/Terraform
       #    terraform force-unlock -force 82b6aa92-75e4-f860-7b3d-0d3188f1568d
 
-      #- name: 'Terraform destroy'
-      #  id: destroy
-      #  run: |
-      #    cd MvcMovie/Terraform
-      #    terraform destroy -auto-approve
+      - name: 'Terraform destroy'
+        id: destroy
+        run: |
+          cd MvcMovie/Terraform
+          terraform destroy -auto-approve
           
       #- name: 'Terraform plan'
       #  id: plan
