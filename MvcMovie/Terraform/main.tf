@@ -33,6 +33,12 @@ resource "azurerm_mssql_server" "MvcMovieMssqlServer" {
   resource_group_name		    = azurerm_resource_group.MvcMovieResourceGroup.name
 }
 
+resource "github_actions_variable" "MvcMovieConnectionString" {
+  repository     = "MvcMovie"
+  variable_name  = "MOVIE_DB_CONNECTION"
+  value = "Server=tcp:${azurerm_mssql_server.MvcMovieMssqlServer.name},1433;Initial Catalog=${azurerm_mssql_database.MvcMovieMssqlDatabase.name};Persist Security Info=False;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+}
+
 resource "azurerm_mssql_database" "MvcMovieMssqlDatabase" {
   name                = "colins-mvc-movie-mssql-database"
   collation           = "SQL_Latin1_General_CP1_CI_AS"
@@ -46,6 +52,6 @@ resource "azurerm_mssql_firewall_rule" "appServiceIP" {
   end_ip_address      = "0.0.0.0"
 }
 
-output "connection_string" {
-  value = "Server=tcp:${azurerm_mssql_server.MvcMovieMssqlServer.name},1433;Initial Catalog=${azurerm_mssql_database.MvcMovieMssqlDatabase.name};Persist Security Info=False;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-}
+# output "connection_string" {
+#  value = "Server=tcp:${azurerm_mssql_server.MvcMovieMssqlServer.name},1433;Initial Catalog=${azurerm_mssql_database.MvcMovieMssqlDatabase.name};Persist Security Info=False;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+# }
