@@ -34,7 +34,7 @@ resource "azurerm_mssql_server" "MvcMovieMssqlServer" {
 }
 
 resource "github_actions_variable" "MvcMovieConnectionString" {
-  repository     = "ColinBeebyHEE/MvcMovie"
+  repository     = "MvcMovie"
   variable_name  = "MOVIE_DB_CONNECTION"
   value = "Server=tcp:${azurerm_mssql_server.MvcMovieMssqlServer.name},1433;Initial Catalog=${azurerm_mssql_database.MvcMovieMssqlDatabase.name};Persist Security Info=False;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 }
