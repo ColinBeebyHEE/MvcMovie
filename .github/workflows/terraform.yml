@@ -33,7 +33,7 @@ jobs:
       AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
       DOTNET_VERSION: '6.0.x'             # set this to the dot net version to use
       TF_VAR_personal_access_token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
-      TF_VAR_sql_admin_password: ${{secrets.SQL_ADMIN_PASSWORD}}
+      TF_VAR_sql_admin_password: ${{ secrets.SQL_ADMIN_PASSWORD }}
       
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
