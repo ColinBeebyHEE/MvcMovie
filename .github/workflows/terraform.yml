@@ -57,11 +57,11 @@ jobs:
           cd MvcMovie/Terraform
           terraform init          
 
-      - name: 'Terraform state list'
-        id: list
+      - name: 'Terraform force unlock'
+        id: unlock
         run: |
           cd MvcMovie/Terraform
-          terraform state list
+          terraform force-unlock eyJJRCI6IjgwMzY0NGU1LTk5NDMtZjY2MS1lMDk4LWZmZGZmOTQzNjEyMCIsIk9wZXJhdGlvbiI6Ik9wZXJhdGlvblR5cGVQbGFuIiwiSW5mbyI6IiIsIldobyI6InJ1bm5lckBmdi1hejEyMTUtMzUzIiwiVmVyc2lvbiI6IjEuNy4yIiwiQ3JlYXRlZCI6IjIwMjQtMDItMDFUMTE6MTU6NDEuNDE5Mjk5NzNaIiwiUGF0aCI6InRmc3RhdGUvY29saW4udGVycmFmb3JtLnRmc3RhdGUifQ
 
       #- name: 'Terraform destroy'
       #  id: destroy
