@@ -57,11 +57,11 @@ jobs:
           cd MvcMovie/Terraform
           terraform init          
 
-      - name: 'Terraform force unlock'
-        id: unlock
-        run: |
-          cd MvcMovie/Terraform
-          terraform force-unlock -force 803644e5-9943-f661-e098-ffdff9436120
+      #- name: 'Terraform force unlock'
+      #  id: unlock
+      #  run: |
+      #    cd MvcMovie/Terraform
+      #    terraform force-unlock -force 803644e5-9943-f661-e098-ffdff9436120
 
       #- name: 'Terraform destroy'
       #  id: destroy
