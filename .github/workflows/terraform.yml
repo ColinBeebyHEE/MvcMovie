@@ -33,7 +33,6 @@ jobs:
       AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
       DOTNET_VERSION: '6.0.x'             # set this to the dot net version to use
       TF_VAR_personal_access_token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
-      TF_VAR_password: ${{secrets.PASSWORD}}
       
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -59,11 +58,11 @@ jobs:
           cd MvcMovie/Terraform
           terraform init          
 
-      - name: 'Terraform force unlock'
-        id: unlock
-        run: |
-          cd MvcMovie/Terraform
-          terraform force-unlock -force 82b6aa92-75e4-f860-7b3d-0d3188f1568d
+      #- name: 'Terraform force unlock'
+      #  id: unlock
+      #  run: |
+      #    cd MvcMovie/Terraform
+      #    terraform force-unlock -force 82b6aa92-75e4-f860-7b3d-0d3188f1568d
 
       #- name: 'Terraform destroy'
       #  id: destroy
@@ -71,11 +70,11 @@ jobs:
       #    cd MvcMovie/Terraform
       #    terraform destroy -auto-approve
           
-      - name: 'Terraform plan'
-        id: plan
-        run: |
-          cd MvcMovie/Terraform
-          terraform plan
+      #- name: 'Terraform plan'
+      #  id: plan
+      #  run: |
+      #    cd MvcMovie/Terraform
+      #    terraform plan
                     
       - name: 'Terraform apply'
         id: apply
@@ -83,11 +82,11 @@ jobs:
           cd MvcMovie/Terraform
           terraform apply -auto-approve
  
-      - name: 'Terraform output'
-        id: output
-        run: |
-          cd MvcMovie/Terraform
-          terraform output connection_string
+      #- name: 'Terraform output'
+      #  id: output
+      #  run: |
+      #    cd MvcMovie/Terraform
+      #    terraform output connection_string
 
       # Setup .NET Core SDK
       - name: Setup .NET Core
