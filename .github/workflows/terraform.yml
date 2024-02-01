@@ -44,6 +44,9 @@ jobs:
         with:
           terraform_wrapper: false
 
+      - name: stuff
+        run: echo "$TF_VAR_sql_admin_password"
+
       - name: 'Az CLI login'
         uses: azure/login@v1
         with:
