@@ -21,7 +21,5 @@ provider "azurerm" {
 }
 provider "github" {
   owner = "ColinBeebyHEE"
-  username = "ColinBeebyHEE"
-  # token = var.personal_access_token
-  password = var.password
+  token = var.personal_access_token
 }
