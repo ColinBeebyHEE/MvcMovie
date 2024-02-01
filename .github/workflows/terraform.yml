@@ -57,6 +57,12 @@ jobs:
           cd MvcMovie/Terraform
           terraform init          
 
+      - name: 'Terraform state list'
+        id: list
+        run: |
+          cd MvcMovie/Terraform
+          terraform state list
+
       #- name: 'Terraform destroy'
       #  id: destroy
       #  run: |
