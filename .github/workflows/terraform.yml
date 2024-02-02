@@ -128,3 +128,8 @@ jobs:
       - name: logout
         run: |
           az logout
+
+      - name: UI Tests
+        run: |
+          cd MvcMovie.UiTests
+          dotnet test
