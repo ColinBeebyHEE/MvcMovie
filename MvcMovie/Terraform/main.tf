@@ -50,7 +50,7 @@ resource "github_actions_environment_variable" "MvcMovieUrl" {
   repository     = "MvcMovie"
   environment    = "dev"
   variable_name  = "MOVIE_URL"
-  value          = "${azurerm_linux_web_app.MvcMovieLinuxWebApp.default_hostname}"
+  value          = "https://${azurerm_linux_web_app.MvcMovieLinuxWebApp.default_hostname}"
 }
 
 resource "azurerm_mssql_firewall_rule" "appServiceIP" {
