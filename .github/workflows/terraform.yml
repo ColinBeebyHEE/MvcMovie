@@ -131,7 +131,7 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "export MOVIE_URL=${{ vars.MOVIE_URL }}" >> $GITHUB_ENV
+          echo "MOVIE_URL=${{ vars.MOVIE_URL }}" >> $GITHUB_ENV
 
       - name: Print environment variables
         run: echo $MOVIE_URL
