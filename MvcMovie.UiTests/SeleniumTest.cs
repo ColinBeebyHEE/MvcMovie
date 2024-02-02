@@ -17,7 +17,9 @@ namespace MvcMovie.UiTests
             chromeOptions.AddArgument("--headless");
             IWebDriver driver = new ChromeDriver(chromeOptions);
 
-            driver.Navigate().GoToUrl("https://colins-mvc-movie-linux-web-app.azurewebsites.net");
+            //driver.Navigate().GoToUrl("https://colins-mvc-movie-linux-web-app.azurewebsites.net");
+
+            driver.Navigate().GoToUrl(Environment.GetEnvironmentVariable("MOVIE_URL"));
 
             var h1Element = driver.FindElement(By.TagName("h1"));
             h1Element.Text.Should().BeEquivalentTo("Welcome");

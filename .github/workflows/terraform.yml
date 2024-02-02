@@ -129,7 +129,12 @@ jobs:
         run: |
           az logout
 
+      - name: Set environment variables
+        run: |
+          echo "export MOVIE_URL=${{ vars.MOVIE_URL }}" >> $GITHUB_ENV
+
       - name: UI Tests
         run: |
           cd MvcMovie.UiTests
           dotnet test
+
