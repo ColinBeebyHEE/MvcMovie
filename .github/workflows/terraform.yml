@@ -103,11 +103,7 @@ jobs:
         with: 
           files: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/appsettings.json'
         env:
-          ConnectionStrings.MvcMovieContext: ${{ secrets.MOVIE_DB_CONNECTION }}
-
-      - name: cat appsetting.json
-        run: |
-          cat ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/appsettings.json
+          ConnectionStrings.MvcMovieContext: ${{ vars.MOVIE_DB_CONNECTION }}
 
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
@@ -121,7 +117,7 @@ jobs:
         run: | 
           dotnet tool install --global dotnet-ef --version 7.0.0
           dotnet tool restore
-          dotnet ef database update -p MvcMovie --connection '${{ secrets.MOVIE_DB_CONNECTION }}'
+          dotnet ef database update -p MvcMovie --connection '${{ vars.MOVIE_DB_CONNECTION }}'
 
       # Azure logout 
       - name: logout
