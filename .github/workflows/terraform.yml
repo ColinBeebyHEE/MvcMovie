@@ -22,11 +22,13 @@ jobs:
   resourcegroups:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    environment: dev
     
     name: 'Terraform MVC Movie Infrastructure'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      # ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       AZURE_WEBAPP_NAME: colins-mvc-movie-linux-web-app    # set this to your application's name
@@ -68,11 +70,11 @@ jobs:
       #    cd MvcMovie/Terraform
       #    terraform force-unlock -force 82b6aa92-75e4-f860-7b3d-0d3188f1568d
 
-      - name: 'Terraform destroy'
-        id: destroy
-        run: |
-          cd MvcMovie/Terraform
-          terraform destroy -auto-approve
+      #- name: 'Terraform destroy'
+      #  id: destroy
+      #  run: |
+      #    cd MvcMovie/Terraform
+      #    terraform destroy -auto-approve
           
       #- name: 'Terraform plan'
       #  id: plan
