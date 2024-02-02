@@ -24,6 +24,11 @@ jobs:
     runs-on: ubuntu-latest
 
     environment: dev
+
+    services: 
+      selenium:
+        image: selenium/standalone-chrome
+        options: --shm-size=2gb
     
     name: 'Terraform MVC Movie Infrastructure'
     env:

@@ -1,3 +1,5 @@
 .vs
 MvcMovie/bin/
 MvcMovie/obj/
+MvcMovie.UiTests/bin/
+MvcMovie.UiTests/obj/
