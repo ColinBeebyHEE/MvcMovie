@@ -132,10 +132,12 @@ jobs:
 
       # Run the DB migrations
       - name: Run EF 
+        env: 
+          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION-${{ steps.extract_branch.outputs.branch }}
         run: | 
           dotnet tool install --global dotnet-ef --version 7.0.0
           dotnet tool restore
-          dotnet ef database update -p MvcMovie --connection ${{ secrets[format('MOVIE_DB_CONNECTION-{0}', ${{ steps.extract_branch.outputs.branch }})] }}
+          dotnet ef database update -p MvcMovie --connection ${{ secrets.MOVIE_CONNECTION_KEY }}
           #dotnet ef database update -p MvcMovie --connection "${{ secrets.MOVIE_DB_CONNECTION-${{ steps.extract_branch.outputs.branch }} }}"
 
       # Azure logout 
