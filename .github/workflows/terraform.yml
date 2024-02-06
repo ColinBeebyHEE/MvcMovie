@@ -135,7 +135,7 @@ jobs:
         run: | 
           dotnet tool install --global dotnet-ef --version 7.0.0
           dotnet tool restore
-          dotnet ef database update -p MvcMovie --connection '${{ secrets.MOVIE_DB_CONNECTION }}'
+          dotnet ef database update -p MvcMovie --connection '${{ secrets.MOVIE_DB_CONNECTION-${{ steps.extract_branch.outputs.branch }} }}'
 
       # Azure logout 
       - name: logout
@@ -144,7 +144,7 @@ jobs:
 
       - name: Set environment variables
         run: |
-          echo "MOVIE_URL=${{ vars.MOVIE_URL }}" >> $GITHUB_ENV
+          echo "MOVIE_URL=${{ vars.MOVIE_URL-${{ steps.extract_branch.outputs.branch }}" >> $GITHUB_ENV
 
       - name: Print environment variables
         run: echo $MOVIE_URL
