@@ -37,7 +37,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_WEBAPP_ROOT: colins-mvc-movie-linux-web-app    # set this to your application's name
+      AZURE_WEBAPP_ROOT: colins-mvc-movie-    # set this to your application's name
       AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
       DOTNET_VERSION: '6.0.x'             # set this to the dot net version to use
       TF_VAR_personal_access_token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
