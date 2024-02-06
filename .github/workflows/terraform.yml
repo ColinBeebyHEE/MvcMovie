@@ -6,8 +6,9 @@ name: MVC Movie Terraform
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    paths:
-      - 'Terraform/*.tf'
+    branches:
+        - 'dev/**'    
+    
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -57,6 +58,11 @@ jobs:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Extract branch names
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF#refs/heads/}" >> $GITHUB_ENV}"
+        id: extract_branch
       
       # Runs a single command using the runners shell
      
@@ -86,6 +92,8 @@ jobs:
                     
       - name: 'Terraform apply'
         id: apply
+        env:
+          TF_VAR_branch_name: ${{ steps.extract_branch.outputs.branch }}
         run: |
           cd MvcMovie/Terraform
           terraform apply -auto-approve

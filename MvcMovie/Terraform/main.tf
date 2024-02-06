@@ -12,7 +12,7 @@ resource "azurerm_service_plan" "MvcMovieServicePlan" {
 }
 
 resource "azurerm_linux_web_app" "MvcMovieLinuxWebApp" {
-  name                = "colins-mvc-movie-linux-web-app"
+  name                = "colins-mvc-movie-${var.branch_name}"
   location            = azurerm_resource_group.MvcMovieResourceGroup.location
   resource_group_name = azurerm_resource_group.MvcMovieResourceGroup.name
   service_plan_id     = azurerm_service_plan.MvcMovieServicePlan.id

@@ -17,3 +17,7 @@ variable "sql_admin_password" {
     type      = string
 	sensitive = true
 }
+
+variable "branch_name" {
+	type      = string
+}
