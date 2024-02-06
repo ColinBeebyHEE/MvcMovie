@@ -63,9 +63,6 @@ jobs:
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
-
-      - name: show branch name
-        run: echo ${{ steps.extract_branch.outputs.branch }}
       
       # Runs a single command using the runners shell
      
