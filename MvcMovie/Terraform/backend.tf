@@ -13,7 +13,7 @@ terraform {
     resource_group_name     = "NE-ELFH-HUB-STOR-RG"
     storage_account_name    = "elfhhubdevstor"
     container_name          = "tfstate"
-    key                     = "colin.terraform.tfstate"
+    key                     = "colin.terraform.${var.branch_name}.tfstate"
   }
 }
 provider "azurerm" {
