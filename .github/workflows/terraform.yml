@@ -68,6 +68,8 @@ jobs:
      
       - name: 'Terraform init'
         id: init
+        env:
+          TF_VAR_branch_name: ${{ steps.extract_branch.outputs.branch }}
         run: |
           cd MvcMovie/Terraform
           terraform init          
@@ -92,8 +94,6 @@ jobs:
                     
       - name: 'Terraform apply'
         id: apply
-        env:
-          TF_VAR_branch_name: ${{ steps.extract_branch.outputs.branch }}
         run: |
           cd MvcMovie/Terraform
           terraform apply -auto-approve
