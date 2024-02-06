@@ -146,7 +146,7 @@ jobs:
 
       - name: Set environment variables
         env:
-          MOVIE_URL_KEY: MOVIE_URL-${{ steps.extract_branch.outputs.branch }}
+          MOVIE_URL_KEY: MOVIE_URL_${{ steps.extract_branch.outputs.branch }}
         run: |
           echo "MOVIE_URL=${{ vars.MOVIE_URL_KEY }}" >> $GITHUB_ENV
 
