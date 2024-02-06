@@ -70,7 +70,7 @@ jobs:
         id: init
         run: |
           cd MvcMovie/Terraform
-          terraform init -var="branch_name=${{ steps.extract_branch.outputs.branch }}"
+          terraform init -var="branch_name=${{ steps.extract_branch.outputs.branch }}" -backend-config="key=colin.terraform.${{ steps.extract_branch.outputs.branch }}.tfstate"
 
       #- name: 'Terraform force unlock'
       #  id: unlock
