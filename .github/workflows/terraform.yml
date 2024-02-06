@@ -72,7 +72,7 @@ jobs:
       - name: 'Terraform init'
         id: init
         env:
-          TF_VAR_branch_name: ${{ steps.extract_branch.outputs.branch }}
+          branch_name: ${{ steps.extract_branch.outputs.branch }}
         run: |
           cd MvcMovie/Terraform
           terraform init          
