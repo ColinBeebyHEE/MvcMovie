@@ -133,7 +133,7 @@ jobs:
       # Run the DB migrations
       - name: Run EF 
         env: 
-          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION-${{ steps.extract_branch.outputs.branch }}
+          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch.outputs.branch }}
         run: | 
           dotnet tool install --global dotnet-ef --version 7.0.0
           dotnet tool restore
