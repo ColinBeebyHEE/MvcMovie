@@ -63,6 +63,9 @@ jobs:
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF#refs/heads/}" >> $GITHUB_ENV
         id: extract_branch
+
+      - name: show branch name
+        run: echo ${{ steps.extract_branch.outputs.branch }}
       
       # Runs a single command using the runners shell
      
