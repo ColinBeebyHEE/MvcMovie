@@ -77,7 +77,7 @@ jobs:
         id: import
         run: |
           cd MvcMovie/Terraform
-          terraform import azurerm_resource_group.MvcMovieResourceGroup
+          terraform import azurerm_resource_group.MvcMovieResourceGroup /subscriptions/66516f71-f3d4-4911-b900-c6e4690a5b15/resourceGroups/rg-loganalytics-001
 
       #- name: 'Terraform force unlock'
       #  id: unlock
