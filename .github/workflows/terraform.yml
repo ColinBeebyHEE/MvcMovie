@@ -145,8 +145,10 @@ jobs:
           az logout
 
       - name: Set environment variables
+        env:
+          MOVIE_URL_KEY: MOVIE_URL-${{ steps.extract_branch.outputs.branch }}
         run: |
-          echo "MOVIE_URL=${{ vars.MOVIE_URL-${{ steps.extract_branch.outputs.branch }}" >> $GITHUB_ENV
+          echo "MOVIE_URL=${{ vars.MOVIE_URL_KEY }}" >> $GITHUB_ENV
 
       - name: Print environment variables
         run: echo $MOVIE_URL
