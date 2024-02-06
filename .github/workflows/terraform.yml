@@ -71,11 +71,9 @@ jobs:
      
       - name: 'Terraform init'
         id: init
-        env:
-          branch_name: ${{ steps.extract_branch.outputs.branch }}
         run: |
           cd MvcMovie/Terraform
-          terraform init          
+          terraform init -var="branch_name=${{ steps.extract_branch.output.branch }}"
 
       #- name: 'Terraform force unlock'
       #  id: unlock
