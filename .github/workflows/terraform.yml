@@ -82,7 +82,7 @@ jobs:
         id: destroy
         run: |
           cd MvcMovie/Terraform
-          terraform destroy -auto-approve
+          terraform destroy -auto-approve -var="branch_name=${{ steps.extract_branch.outputs.branch }}"
           
       #- name: 'Terraform plan'
       #  id: plan
