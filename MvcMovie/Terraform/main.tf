@@ -42,14 +42,14 @@ resource "azurerm_mssql_database" "MvcMovieMssqlDatabase" {
 resource "github_actions_environment_secret" "MvcMovieConnectionString" {
   repository      = "MvcMovie"
   environment     = "dev"
-  secret_name     = "MOVIE_DB_CONNECTION_${var.branch_name}"
+  secret_name     = "MOVIE_DB_CONNECTION_${replace(var.branch_name, "[.-]", "_")}"
   plaintext_value = "Server=tcp:${azurerm_mssql_server.MvcMovieMssqlServer.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.MvcMovieMssqlDatabase.name};Persist Security Info=False;User ID=exampleadmin;Password=${var.sql_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 }
 
 resource "github_actions_environment_variable" "MvcMovieUrl" {
   repository     = "MvcMovie"
   environment    = "dev"
-  variable_name  = "MOVIE_URL_${replace(var.branch_name, "[./-]", "_")}"
+  variable_name  = "MOVIE_URL_${replace(var.branch_name, "[.-]", "_")}"
   value          = "https://${azurerm_linux_web_app.MvcMovieLinuxWebApp.default_hostname}"
 }
 
