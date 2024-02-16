@@ -21,4 +21,3 @@ variable "sql_admin_password" {
 variable "branch_name" {
 	type      = string
 }
-
