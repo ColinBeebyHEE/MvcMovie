@@ -49,7 +49,7 @@ resource "github_actions_environment_secret" "MvcMovieConnectionString" {
 resource "github_actions_environment_variable" "MvcMovieUrl" {
   repository     = "MvcMovie"
   environment    = "dev"
-  variable_name  = "MOVIE_URL-${var.branch_name}"
+  variable_name  = "MOVIE_URL_${var.safe_branch_name}"
   value          = "https://${azurerm_linux_web_app.MvcMovieLinuxWebApp.default_hostname}"
 }
 
