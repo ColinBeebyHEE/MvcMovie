@@ -71,7 +71,7 @@ jobs:
         shell: bash
         run: |
           BRANCH_TRANSFORM=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-          echo "branch_transform=${BRANCH_TRANSFORM//-/_}" >> $GITHUB_OUTPUT
+          echo "branch_transform=${BRANCH_TRANSFORM@U//-/_}" >> $GITHUB_OUTPUT
         id: extract_branch_transform
       # Runs a single command using the runners shell
      
