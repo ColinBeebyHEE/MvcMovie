@@ -136,13 +136,13 @@ jobs:
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
         with: 
-          app-name: '${{ env.AZURE_WEBAPP_ROOT }}${{ steps.extract_branch_transform.outputs.branch }}' # need to do replace of - with _ here extract_branch_transform
+          app-name: '${{ env.AZURE_WEBAPP_ROOT }}${{ steps.extract_branch.outputs.branch }}' # need to do replace of - with _ here extract_branch_transform
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
       # Run the DB migrations
       - name: Run EF 
         env: 
-          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch.outputs.branch }}
+          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
         run: | 
           dotnet tool install --global dotnet-ef --version 7.0.0
           dotnet tool restore
