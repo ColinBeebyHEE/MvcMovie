@@ -62,7 +62,7 @@ jobs:
       - name: Extract branch names
         shell: bash
         run: |
-          BRANCH = ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
           echo "branch=${BRANCH//-/_}" >> $GITHUB_OUTPUT
           echo $BRANCH
         id: extract_branch
