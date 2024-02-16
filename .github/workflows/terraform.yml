@@ -63,7 +63,7 @@ jobs:
         shell: bash
         run: |
           BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-          echo "branch=${BRANCH//-/_}" >> $GITHUB_OUTPUT
+          echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
           echo $BRANCH
         id: extract_branch
       
