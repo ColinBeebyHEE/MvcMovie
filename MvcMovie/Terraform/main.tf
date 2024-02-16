@@ -46,6 +46,10 @@ resource "github_actions_environment_secret" "MvcMovieConnectionString" {
   plaintext_value = "Server=tcp:${azurerm_mssql_server.MvcMovieMssqlServer.fully_qualified_domain_name},1433;Initial Catalog=${azurerm_mssql_database.MvcMovieMssqlDatabase.name};Persist Security Info=False;User ID=exampleadmin;Password=${var.sql_admin_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 }
 
+variable "safe_branch_name" {
+    default   = replace(var.branch_name, "[./-]", "-")
+}
+
 resource "github_actions_environment_variable" "MvcMovieUrl" {
   repository     = "MvcMovie"
   environment    = "dev"

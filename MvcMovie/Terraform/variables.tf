@@ -22,6 +22,3 @@ variable "branch_name" {
 	type      = string
 }
 
-variable "safe_branch_name" {
-    default   = replace(var.branch_name, "[./-]", "-")
-}
