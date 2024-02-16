@@ -37,7 +37,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-      AZURE_WEBAPP_ROOT: colins-mvc-movie-    # set this to your application's name
+      AZURE_WEBAPP_ROOT: colins-mvc-movie-app-    # set this to your application's name
       AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
       DOTNET_VERSION: '6.0.x'             # set this to the dot net version to use
       TF_VAR_personal_access_token: ${{secrets.PERSONAL_ACCESS_TOKEN}}
@@ -61,7 +61,7 @@ jobs:
 
       - name: Extract branch names
         shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}//-/_}" >> $GITHUB_OUTPUT
         id: extract_branch
       
       # Runs a single command using the runners shell
@@ -73,11 +73,11 @@ jobs:
           terraform init -var="branch_name=${{ steps.extract_branch.outputs.branch }}" -backend-config="key=colin.terraform.${{ steps.extract_branch.outputs.branch }}.tfstate"
 
       # having to do this bit as I don't have permission to create resource groups on Azure, so reusing an existing one.
-      - name: 'Terraform import'
-        id: import
-        run: |
-          cd MvcMovie/Terraform
-          terraform import -var="branch_name=${{ steps.extract_branch.outputs.branch }}" azurerm_resource_group.MvcMovieResourceGroup /subscriptions/66516f71-f3d4-4911-b900-c6e4690a5b15/resourceGroups/rg-loganalytics-001
+      # - name: 'Terraform import'
+      #   id: import
+      #   run: |
+      #     cd MvcMovie/Terraform
+      #     terraform import -var="branch_name=${{ steps.extract_branch.outputs.branch }}" azurerm_resource_group.MvcMovieResourceGroup /subscriptions/66516f71-f3d4-4911-b900-c6e4690a5b15/resourceGroups/rg-loganalytics-001
 
       #- name: 'Terraform force unlock'
       #  id: unlock
@@ -127,7 +127,7 @@ jobs:
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
         with: 
-          app-name: '${{ env.AZURE_WEBAPP_ROOT }}${{ steps.extract_branch.outputs.branch }}'
+          app-name: '${{ env.AZURE_WEBAPP_ROOT }}${{ steps.extract_branch.outputs.branch }}' # need to do replace of - with _ here
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
       # Run the DB migrations
