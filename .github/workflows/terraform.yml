@@ -85,11 +85,11 @@ jobs:
       #    cd MvcMovie/Terraform
       #    terraform force-unlock -force 82b6aa92-75e4-f860-7b3d-0d3188f1568d
 
-      #- name: 'Terraform destroy'
-      #  id: destroy
-      #  run: |
-      #    cd MvcMovie/Terraform
-      #    terraform destroy -auto-approve -var="branch_name=${{ steps.extract_branch.outputs.branch }}"
+      - name: 'Terraform destroy'
+        id: destroy
+        run: |
+          cd MvcMovie/Terraform
+           terraform destroy -auto-approve -var="branch_name=${{ steps.extract_branch.outputs.branch }}"
           
       #- name: 'Terraform plan'
       #  id: plan
