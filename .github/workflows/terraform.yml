@@ -66,7 +66,13 @@ jobs:
           echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
           echo $BRANCH
         id: extract_branch
-      
+
+      - name: Transform Branch Name
+        shell: bash
+        run: |
+          BRANCH_TRANSFORM=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "branch_transform=${BRANCH_TRANSFORM//-/_}" >> $GITHUB_OUTPUT
+        id: extract_branch_transform
       # Runs a single command using the runners shell
      
       - name: 'Terraform init'
@@ -130,7 +136,7 @@ jobs:
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
         with: 
-          app-name: '${{ env.AZURE_WEBAPP_ROOT }}${{ steps.extract_branch.outputs.branch }}' # need to do replace of - with _ here
+          app-name: '${{ env.AZURE_WEBAPP_ROOT }}${{ steps.extract_branch_transform.outputs.branch }}' # need to do replace of - with _ here extract_branch_transform
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
       # Run the DB migrations
