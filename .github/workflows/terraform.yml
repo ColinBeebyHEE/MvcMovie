@@ -128,13 +128,13 @@ jobs:
           dotnet build --configuration Release
           dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
 
-      - name: App Settings Variable Substitution
-        uses: microsoft/variable-substitution@v1
-        with: 
-          files: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/appsettings.json'
-        env:
-          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
-          ConnectionStrings.MvcMovieContext: ${{ secrets[env.MOVIE_CONNECTION_KEY] }}
+      # - name: App Settings Variable Substitution
+      #   uses: microsoft/variable-substitution@v1
+      #   with: 
+      #     files: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/appsettings.json'
+      #   env:
+      #     MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
+      #     ConnectionStrings.MvcMovieContext: ${{ secrets[env.MOVIE_CONNECTION_KEY] }}
 
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
