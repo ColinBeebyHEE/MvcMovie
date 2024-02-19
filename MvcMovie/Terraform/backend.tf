@@ -8,6 +8,10 @@ terraform {
 	source = "integrations/github"
 	version = "~> 5.0"
 	}
+	mssql = {
+      source = "betr-io/mssql"
+      version = "0.3.0"
+    }
   }
   backend "azurerm" {
     resource_group_name     = "NE-ELFH-HUB-STOR-RG"
@@ -22,4 +26,6 @@ provider "azurerm" {
 provider "github" {
   owner = "ColinBeebyHEE"
   token = var.personal_access_token
+}
+provider "mssql"{
 }
