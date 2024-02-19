@@ -82,24 +82,26 @@ jobs:
           cd MvcMovie/Terraform
           terraform init -var="branch_name=${{ steps.extract_branch.outputs.branch }}" -backend-config="key=colin.terraform.${{ steps.extract_branch.outputs.branch }}.tfstate"
 
-      # having to do this bit as I don't have permission to create resource groups on Azure, so reusing an existing one.
-      # - name: 'Terraform import'
-      #   id: import
-      #   run: |
-      #     cd MvcMovie/Terraform
-      #     terraform import -var="branch_name=${{ steps.extract_branch.outputs.branch }}" azurerm_resource_group.MvcMovieResourceGroup /subscriptions/66516f71-f3d4-4911-b900-c6e4690a5b15/resourceGroups/rg-loganalytics-001
-
+      
       #- name: 'Terraform force unlock'
       #  id: unlock
       #  run: |
       #    cd MvcMovie/Terraform
       #    terraform force-unlock -force 82b6aa92-75e4-f860-7b3d-0d3188f1568d
 
-      # - name: 'Terraform destroy'
-      #   id: destroy
-      #   run: |
-      #     cd MvcMovie/Terraform
-      #      terraform destroy -auto-approve -var="branch_name=${{ steps.extract_branch.outputs.branch }}"
+      - name: 'Terraform destroy'
+        id: destroy
+        run: |
+          cd MvcMovie/Terraform
+           terraform destroy -auto-approve -var="branch_name=${{ steps.extract_branch.outputs.branch }}"
+
+      # having to do this bit as I don't have permission to create resource groups on Azure, so reusing an existing one.
+      - name: 'Terraform import'
+        id: import
+        run: |
+          cd MvcMovie/Terraform
+          terraform import -var="branch_name=${{ steps.extract_branch.outputs.branch }}" azurerm_resource_group.MvcMovieResourceGroup /subscriptions/66516f71-f3d4-4911-b900-c6e4690a5b15/resourceGroups/rg-loganalytics-001
+
           
       #- name: 'Terraform plan'
       #  id: plan
@@ -131,7 +133,8 @@ jobs:
         with: 
           files: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/appsettings.json'
         env:
-          ConnectionStrings.MvcMovieContext: ${{ secrets.MOVIE_DB_CONNECTION }}
+          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
+          ConnectionStrings.MvcMovieContext: ${{ secrets[env.MOVIE_CONNECTION_KEY] }}
 
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
