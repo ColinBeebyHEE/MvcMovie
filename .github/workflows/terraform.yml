@@ -147,8 +147,8 @@ jobs:
         run: | 
           dotnet tool install --global dotnet-ef --version 7.0.0
           dotnet tool restore
-          #dotnet ef database update -p MvcMovie --connection ${{ secrets.MOVIE_CONNECTION_KEY }}
-          dotnet ef database update -p MvcMovie --connection ${{ secrets.MOVIE_DB_CONNECTION_COLIN_TEST_DEPLOY }}
+          dotnet ef database update -p MvcMovie --connection ${{ secrets[env.MOVIE_CONNECTION_KEY] }}
+          #dotnet ef database update -p MvcMovie --connection ${{ secrets.MOVIE_DB_CONNECTION_COLIN_TEST_DEPLOY }}
 
       # Azure logout 
       - name: logout
