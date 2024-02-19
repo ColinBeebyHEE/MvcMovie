@@ -81,8 +81,7 @@ jobs:
         run: |
           cd MvcMovie/Terraform
           terraform init -var="branch_name=${{ steps.extract_branch.outputs.branch }}" -backend-config="key=colin.terraform.${{ steps.extract_branch.outputs.branch }}.tfstate"
-        env:
-          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
+        
 
       
       #- name: 'Terraform force unlock'
@@ -125,10 +124,12 @@ jobs:
 
       - name: Replace string in file
         uses: MathieuSoysal/replace-string-in-file@v1.0.0
+        env:
+          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
         with:
           file: '**/appsettings.json'
           old-string: CONNECTION_STRING
-          new-string: "${{ secrets[env.MOVIE_CONNECTION_KEY] }}"
+          new-string: ${{ secrets[env.MOVIE_CONNECTION_KEY] }}
           #new-string: "Server=tcp:colins-mvc-movie-mssql-server-colin-test-deploy.database.windows.net,1433;Initial Catalog=colins-mvc-movie-mssql-database-colin-test-deploy;Persist Security Info=True;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=true;Connection Timeout=30;"
       
       # Run dotnet build and publish
