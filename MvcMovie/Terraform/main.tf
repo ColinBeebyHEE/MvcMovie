@@ -66,3 +66,10 @@ resource "azurerm_mssql_firewall_rule" "appServiceIP" {
   start_ip_address    = "0.0.0.0"
   end_ip_address      = "0.0.0.0"
 }
+
+resource "azurerm_mssql_firewall_rule" "localIP" {
+  name                = "LocalIP"
+  server_id			  = azurerm_mssql_server.MvcMovieMssqlServer.id
+  start_ip_address    = "86.28.98.175"
+  end_ip_address      = "86.28.98.175"
+}
