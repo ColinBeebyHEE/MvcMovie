@@ -189,6 +189,9 @@ jobs:
       - name: Print environment variables
         run: echo $MOVIE_URL
 
+      - name: Pause Before UI Tests
+        run: sleep 60
+
       - name: UI Tests
         run: |
           cd MvcMovie.UiTests
