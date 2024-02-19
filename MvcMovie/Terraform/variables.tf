@@ -5,7 +5,7 @@ variable "Location" {
 
 variable "ResourceGroup" {
     type        = string
-    default     = "rg-loganalytics-001"   
+    default     = "MvcMovieRG"   
 }
 
 variable "personal_access_token" {
