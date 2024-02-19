@@ -138,11 +138,18 @@ jobs:
       #     MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
       #     # ConnectionStrings.MvcMovieContext: "Server=tcp:colins-mvc-movie-mssql-server-colin-test-deploy.database.windows.net,1433;Initial Catalog=colins-mvc-movie-mssql-database-colin-test-deploy;Persist Security Info=True;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=true;Connection Timeout=30;"
 
-      - name: Replace tokens in files
-        uses: flcdrg/replace-multiple-action@v1
+      # - name: Replace tokens in files
+      #   uses: flcdrg/replace-multiple-action@v1
+      #   with:
+      #     files: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/appsettings.json'
+      #     find: '[ { "CONNECTION_STRING": "${{ secrets[env.MOVIE_CONNECTION_KEY] }}" }]'
+
+      - name: Replace string in file
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          files: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/appsettings.json'
-          find: '[ { "CONNECTION_STRING": "${{ secrets[env.MOVIE_CONNECTION_KEY] }}" }]'
+          file: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/appsettings.json'
+          old-string: CONNECTION_STRING
+          new-string: "Server=tcp:colins-mvc-movie-mssql-server-colin-test-deploy.database.windows.net,1433;Initial Catalog=colins-mvc-movie-mssql-database-colin-test-deploy;Persist Security Info=True;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=true;Connection Timeout=30;"
 
 
       # Deploy to Azure Web apps
