@@ -45,7 +45,7 @@ resource "mssql_user" "MvcMovieMssqlUser" {
   }
   database            = "${azurerm_mssql_database.MvcMovieMssqlDatabase.name}"
   username            = "MvcMovieUser"
-  password            = var.sql_user_password
+  password            = "TestPassword1234!"
   roles               = ["sysadmin"]
 }
 
