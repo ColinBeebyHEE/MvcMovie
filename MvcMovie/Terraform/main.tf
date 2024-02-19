@@ -33,6 +33,13 @@ resource "azurerm_mssql_server" "MvcMovieMssqlServer" {
   resource_group_name		    = azurerm_resource_group.MvcMovieResourceGroup.name
 }
 
+resource "azurerm_mssql_user" "MvcMovieMssqlUser" {
+  name                = "MvcMovieUser"
+  server_id			  = azurerm_mssql_server.MvcMovieMssqlServer.id
+  password            = var.sql_user_password
+  roles               = ["sysadmin"]
+}
+
 resource "azurerm_mssql_database" "MvcMovieMssqlDatabase" {
   name                = "colins-mvc-movie-mssql-database-${var.branch_name}"
   collation           = "SQL_Latin1_General_CP1_CI_AS"
