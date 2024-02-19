@@ -128,7 +128,7 @@ jobs:
         with:
           file: '**/appsettings.json'
           old-string: CONNECTION_STRING
-          new-string: '${{ secrets[env.MOVIE_CONNECTION_KEY] }}'
+          new-string: "${{ secrets[env.MOVIE_CONNECTION_KEY] }}"
           #new-string: "Server=tcp:colins-mvc-movie-mssql-server-colin-test-deploy.database.windows.net,1433;Initial Catalog=colins-mvc-movie-mssql-database-colin-test-deploy;Persist Security Info=True;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=true;Connection Timeout=30;"
       
       # Run dotnet build and publish
