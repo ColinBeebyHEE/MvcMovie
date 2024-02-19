@@ -40,10 +40,10 @@ resource "azurerm_mssql_database" "MvcMovieMssqlDatabase" {
 }
 
 resource "mssql_user" "MvcMovieMssqlUser" {
-  host                = ${azurerm_mssql_server.MvcMovieMssqlServer.fully_qualified_domain_name}
+  host                = "${azurerm_mssql_server.MvcMovieMssqlServer.fully_qualified_domain_name}"
   azure_login {
   }
-  database            = ${azurerm_mssql_database.MvcMovieMssqlDatabase.name}
+  database            = "${azurerm_mssql_database.MvcMovieMssqlDatabase.name}"
   username            = "MvcMovieUser"
   password            = var.sql_user_password
   roles               = ["sysadmin"]
