@@ -75,12 +75,14 @@ jobs:
           echo "branch_transform=${BRANCH_TRANSFORM_UPPER//-/_}" >> $GITHUB_OUTPUT
         id: extract_branch_transform
       # Runs a single command using the runners shell
-     
+
       - name: 'Terraform init'
         id: init
         run: |
           cd MvcMovie/Terraform
           terraform init -var="branch_name=${{ steps.extract_branch.outputs.branch }}" -backend-config="key=colin.terraform.${{ steps.extract_branch.outputs.branch }}.tfstate"
+        env:
+          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
 
       
       #- name: 'Terraform force unlock'
@@ -126,7 +128,8 @@ jobs:
         with:
           file: '**/appsettings.json'
           old-string: CONNECTION_STRING
-          new-string: "Server=tcp:colins-mvc-movie-mssql-server-colin-test-deploy.database.windows.net,1433;Initial Catalog=colins-mvc-movie-mssql-database-colin-test-deploy;Persist Security Info=True;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=true;Connection Timeout=30;"
+          new-string: '${{ secrets[env.MOVIE_CONNECTION_KEY] }}'
+          #new-string: "Server=tcp:colins-mvc-movie-mssql-server-colin-test-deploy.database.windows.net,1433;Initial Catalog=colins-mvc-movie-mssql-database-colin-test-deploy;Persist Security Info=True;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=true;Connection Timeout=30;"
       
       # Run dotnet build and publish
       - name: dotnet build and publish
@@ -134,8 +137,6 @@ jobs:
           dotnet restore
           dotnet build --configuration Release
           dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
-        env:
-          MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
 
       # - name: App Settings Variable Substitution
       #   uses: microsoft/variable-substitution@v1
