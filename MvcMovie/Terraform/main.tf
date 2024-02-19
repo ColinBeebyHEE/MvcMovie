@@ -43,6 +43,7 @@ resource "mssql_user" "MvcMovieMssqlUser" {
   server {
     host = "${azurerm_mssql_server.MvcMovieMssqlServer.fully_qualified_domain_name}"
     azure_login {
+    }
   }
   database            = "${azurerm_mssql_database.MvcMovieMssqlDatabase.name}"
   username            = "MvcMovieUser"
