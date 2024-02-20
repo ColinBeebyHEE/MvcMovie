@@ -166,6 +166,8 @@ jobs:
           echo "MOVIE_URL=${{ vars.MOVIE_URL_KEY }}" >> $GITHUB_ENV
 
       - name: Print environment variables
+        env:
+          MOVIE_URL: ${{ steps.extract_branch_transform.outputs.branch_transform }}
         run: echo $MOVIE_URL
 
       - name: UI Tests
