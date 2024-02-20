@@ -142,7 +142,7 @@ jobs:
       - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
         with: 
-          app-name: '${{ env.AZURE_WEBAPP_ROOT }}${{ steps.extract_branch.outputs.branch }}' # need to do replace of - with _ here extract_branch_transform
+          app-name: '${{ env.AZURE_WEBAPP_ROOT }}${{ steps.extract_branch.outputs.branch }}' 
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
       # Run the DB migrations
@@ -150,12 +150,9 @@ jobs:
         env: 
           MOVIE_CONNECTION_KEY: MOVIE_DB_CONNECTION_${{ steps.extract_branch_transform.outputs.branch_transform }}
         run: | 
-          echo "MOVIE_CONNECTION_KEY=${{ env.MOVIE_CONNECTION_KEY }}"
-          echo "secrets[env.MOVIE_CONNECTION_KEY] = ${{ secrets[env.MOVIE_CONNECTION_KEY] }}"
           dotnet tool install --global dotnet-ef --version 7.0.0
           dotnet tool restore
           dotnet ef database update -p MvcMovie --connection "${{ secrets[env.MOVIE_CONNECTION_KEY] }}"
-          #dotnet ef database update -p MvcMovie --connection "Server=tcp:colins-mvc-movie-mssql-server-colin-test-deploy.database.windows.net,1433;Initial Catalog=colins-mvc-movie-mssql-database-colin-test-deploy;Persist Security Info=True;User ID=exampleadmin;Password=Ex@mpleP@ssword123;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=true;Connection Timeout=30;"
 
       # Azure logout 
       - name: logout
@@ -164,15 +161,12 @@ jobs:
 
       - name: Set environment variables
         env:
-          MOVIE_URL_KEY: MOVIE_URL_${{ steps.extract_branch.outputs.branch }}
+          MOVIE_URL_KEY: MOVIE_URL_${{ steps.extract_branch_transform.outputs.branch_transform }}
         run: |
           echo "MOVIE_URL=${{ vars.MOVIE_URL_KEY }}" >> $GITHUB_ENV
 
       - name: Print environment variables
         run: echo $MOVIE_URL
-
-      - name: Pause Before UI Tests
-        run: sleep 60
 
       - name: UI Tests
         run: |
