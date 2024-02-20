@@ -82,8 +82,6 @@ jobs:
           cd MvcMovie/Terraform
           terraform init -var="branch_name=${{ steps.extract_branch.outputs.branch }}" -backend-config="key=colin.terraform.${{ steps.extract_branch.outputs.branch }}.tfstate"
         
-
-      
       #- name: 'Terraform force unlock'
       #  id: unlock
       #  run: |
@@ -102,13 +100,6 @@ jobs:
       #   run: |
       #     cd MvcMovie/Terraform
       #     terraform import -var="branch_name=${{ steps.extract_branch.outputs.branch }}" azurerm_resource_group.MvcMovieResourceGroup /subscriptions/66516f71-f3d4-4911-b900-c6e4690a5b15/resourceGroups/rg-loganalytics-001
-
-          
-      #- name: 'Terraform plan'
-      #  id: plan
-      #  run: |
-      #    cd MvcMovie/Terraform
-      #    terraform plan
                     
       - name: 'Terraform apply'
         id: apply
@@ -162,11 +153,8 @@ jobs:
       - name: Set environment variables
         env:
           MOVIE_URL_KEY: MOVIE_URL_${{ steps.extract_branch_transform.outputs.branch_transform }}
-          #MOVIE_URL: ${{ vars[env.MOVIE_URL_KEY] }}
         run: |
           echo "MOVIE_URL=${{ vars[env.MOVIE_URL_KEY] }}" >> $GITHUB_ENV
-          #echo "${{ env.MOVIE_URL }}"
-
 
       - name: UI Tests
         run: |
