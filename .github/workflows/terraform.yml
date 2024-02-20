@@ -168,7 +168,10 @@ jobs:
       - name: Print environment variables
         env:
           MOVIE_URL: '${{ vars[env.MOVIE_URL_KEY] }}'
-        run: echo $MOVIE_URL
+        run: |
+          echo "MOVIE_URL=${{ env.MOVIE_URL_KEY }}"
+          echo "$MOVIE_URL_KEY"
+          echo "${{ vars[env.MOVIE_URL_KEY] }}"
 
       - name: UI Tests
         run: |
